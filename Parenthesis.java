@@ -6,6 +6,7 @@ public class Parenthesis {
 		System.out.print("ENTER BRACKETS : ");
 		String str = sc.next();
 		Stack<Character> s=new Stack<>();
+		boolean isFinished=false;
 		
 		if(str.charAt(0)=='}'||str.charAt(0)==']'||str.charAt(0)==')')
 		{
@@ -19,35 +20,62 @@ public class Parenthesis {
 			{
 				s.push(str.charAt(i));
 			}
-			else if(str.charAt(i)=='}'||str.charAt(i)==']'||str.charAt(i)==')')
+			else
 			{
 				if(s.empty())
 				{
+					System.out.println("Not Nested "+i);
 					break;
+					
 				}
 				else
 				{
+				if(s.peek()=='('&&str.charAt(i)==')')
+				{
+					s.pop();
+				}
+				else if(s.peek()=='{'&&str.charAt(i)=='}')
+				{
 				s.pop();
 				}
+				else if(s.peek()=='['&&str.charAt(i)==']')
+				{
+				s.pop();
+				}
+				else
+				{
+					System.out.print("Wrong Bracket at INDEX : "+(i));
+					break;
+					
+				}
 			}
-			else
+			}
+			if(i==str.length()-1)
 			{
-				System.out.println("STRING CONTAINS OTHER CHARACTERS");
-				break;
+				isFinished=true;
 			}
 			
+			
+			
+		}
+		if(isFinished)
+		{
+			if(s.empty()==false)
+			{
+		if(s.peek()=='{'||s.peek()=='['||s.peek()=='(')
+		{
+			System.out.print("Wrong Bracket at INDEX : "+(str.length()));
+		}
+		}
+			else
+			{
+				System.out.print("BRACKETS ARE NESTED");
+			}
 		}
 		
-		if(s.empty())
-		{
-			System.out.print("Brackets Are NESTED");
-		}
-		else
-		{
-			System.out.print("Brackets Are NOT NESTED");
-		}
-		}
+		
 
 	}
 
+	}
 }
